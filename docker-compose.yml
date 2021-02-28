@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  node:
+    container_name: node-storyblock
+    user: node
+    image: node:lts
+    env_file: .env
+    ports:
+      - ${NUXT_PORT}:${NUXT_PORT}
+    networks:
+      - storyblock-network
+    working_dir: /app
+    volumes:
+      - ./sources:/app
+    entrypoint: npm run dev
+
+networks:
+  storyblock-network:
+    driver: bridge
+
+volumes:
+  storyblock-data:
